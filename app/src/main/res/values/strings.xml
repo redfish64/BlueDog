@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">BlueDog Tracker</string>
+
+    <!-- Scanner Screen -->
+    <string name="start_scan">Start Scan</string>
+    <string name="stop_scan">Stop Scan</string>
+    <string name="stop_test">Stop Test</string>
+    <string name="grant_permissions">Grant Permissions</string>
+    <string name="settings">Settings</string>
+
+    <!-- Settings Screen -->
+    <string name="vibration_alert_ms">Vibration Alert(ms)</string>
+    <string name="off">Off</string>
+    <string name="audible_chime">Audible Chime</string>
+    <string name="screen_dim_timeout">Screen Dim Timeout while Scanning</string>
+    <string name="screen_dim_level">Screen Dim Timeout Dimming Level</string>
+    <string name="radar_divisions">Radar Divisions</string>
+    <string name="radar_divisions_format">Radar Divisions: %d</string>
+    <string name="select_radar_divisions">Select Radar Divisions</string>
+    <string name="review_blocked">Review Blocked</string>
+    <string name="test">Test</string>
+    <string name="timeout_5s">5s</string>
+    <string name="timeout_30s">30s</string>
+
+    <!-- Review Screens -->
+    <string name="no_devices_blocked">No devices blocked.</string>
+    <string name="unknown_device">Unknown Device</string>
+    <string name="unblock_all">Unblock All</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Device Overlay -->
+    <string name="rssi_format">RSSI: %d dBm</string>
+    <string name="seen_ago_format">Seen %s ago</string>
+    <string name="block">Block</string>
+
+    <!-- Chime Selection Screen -->
+    <string name="chime">Chime</string>
+    <string name="select_chime_format">Select %s</string>
+
+    <!-- Chime Options -->
+    <string name="chime_click">Click</string>
+    <string name="chime_focus">Focus</string>
+    <string name="chime_call_guard">Call Guard</string>
+    <string name="chime_network_lite">Network Lite</string>
+    <string name="chime_beep">Beep</string>
+    <string name="chime_ack">Ack</string>
+    <string name="chime_nack">Nack</string>
+    <string name="chime_dtmf_0">DTMF 0</string>
+    <string name="chime_dtmf_1">DTMF 1</string>
+    <string name="chime_dtmf_2">DTMF 2</string>
+    <string name="chime_dtmf_3">DTMF 3</string>
+    <string name="chime_dtmf_4">DTMF 4</string>
+    <string name="chime_dtmf_5">DTMF 5</string>
+    <string name="chime_dtmf_6">DTMF 6</string>
+    <string name="chime_dtmf_7">DTMF 7</string>
+    <string name="chime_dtmf_8">DTMF 8</string>
+    <string name="chime_dtmf_9">DTMF 9</string>
+    <string name="chime_dtmf_star">DTMF Star</string>
+    <string name="chime_dtmf_pound">DTMF Pound</string>
+
+    <!-- Screen Dim Modes -->
+    <string name="dim_mode_black">Black</string>
+    <string name="dim_mode_dark">1%</string>
+    <string name="dim_mode_dim">5%</string>
+
+    <!-- MainActivity Notifications -->
+    <string name="ongoing_ble_scanning">Ongoing BLE scanning activity</string>
+    <string name="scanning_for_devices">Scanning for BLE devices…</string>
+    <string name="unknown">Unknown</string>
+    <string name="no_perm">No Perm</string>
+    <string name="test_prefix">Test-</string>
+</resources>

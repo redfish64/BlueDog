@@ -1,0 +1,21 @@
+multi language
+see if we can detect different types of bt devices
+maybe try gemini's suggestion of a bluetooth foreground service with a pending intent to save battery.
+
+create user manual.
+Can we work on making html documentation for this project? You can take a look at the code, but the basic
+  idea is to be able to use a wearos device to find and differentiate bluetooth devices. For example, suppose
+  the user was walking in the woods with their two dogs with bluetooth tracker devices such as apple's AirTag.
+  This app could note their presence. Another example would be suppose that you wanted to find the bluetooth
+  devices associated with a particular place, person, or thing, such as a car, for security purposes. You could
+  visit the place, come in contact with the person, or start and use the car on several different times. This
+  app could then discover which bluetooth addresses were consistantly there, after multiple visits. This would
+  allow you to know which, if any bluetooth addresses were associated with a place, person or thing.
+  You can also block devices temporarily to declutter the radar when needed. Also, we'll have to talk about groups, which allows
+  you to separate different investigations so that you can track several things at once. I'd leave that to the
+  end though, and call it advanced. Please place the documentation in the docs/ directory. I placed some
+  screenshots there. If you need more screenshots, let me know.
+Instead of refering to BLE bluetooth low energy devices, just use the term bluetooth devices. BLE bluetooth low energy devices is too long, it makes it harder for the user to pay attention.
+
+
+rename to bluedog

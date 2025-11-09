@@ -1,0 +1,5 @@
+{
+    "repo":"private",
+    "archive":"forever",
+    "excludes": ["re:/app/build/.*"]
+}

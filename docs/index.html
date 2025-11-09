@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueDog Tracker – Keep Eyes On Your Pup</title>
+    <style>
+        :root {
+            --bg: #0b1228;
+            --card: #142040;
+            --accent: #4a9eff;
+            --accent-soft: #7b5dff;
+            --text: #eef2ff;
+            --text-muted: #9aa0bc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(160deg, var(--bg), #060914);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a { color: var(--accent); }
+
+        header {
+            padding: 2.5rem 1rem 1.5rem;
+            text-align: center;
+        }
+
+        header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            box-shadow: 0 12px 40px rgba(74, 158, 255, 0.25);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(120deg, var(--accent), var(--accent-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p.tagline {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin: 0.75rem auto 1.25rem;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 0 auto 4rem;
+            padding: 0 1.25rem;
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        section {
+            background: rgba(20, 32, 64, 0.65);
+            border: 1px solid rgba(122, 140, 190, 0.12);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 22px 60px rgba(8, 15, 40, 0.35);
+        }
+
+        section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        ul.inline-list {
+            display: grid;
+            gap: 0.75rem;
+            list-style: none;
+        }
+
+        ul.inline-list li {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 0.75rem 1rem;
+        }
+
+        .two-column {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 720px) {
+            .two-column {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(74, 158, 255, 0.15);
+            border: 1px solid rgba(74, 158, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.08rem;
+            margin-left: 0.6rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="bluedog_logo.png" alt="BlueDog Tracker logo">
+        <h1>BlueDog Tracker</h1>
+        <p class="tagline">
+            A Wear OS companion that spots nearby Bluetooth trackers so you always know whether your pup is still within range – even when you leave your phone at home.
+        </p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Why BlueDog?</h2>
+            <p>
+                Traditional Bluetooth trackers regularly rotate their addresses. In a crowded city that makes long-term surveillance tricky – but out on forest trails or
+                quiet beaches the only devices you should see are the ones you packed. BlueDog leans into that reality and gives you a fast, wrist-first view of the
+                trackers attached to your dog’s collar.
+            </p>
+            <ul class="inline-list">
+                <li><strong>Phone-free walks:</strong> start a scan directly on your watch and glance at the dial to confirm your dog’s tracker is still nearby.</li>
+                <li><strong>Instant awareness:</strong> Shows last time BT devices were detected and the signal strength encoded as easy to decipher color coded slices.</li>
+                <li><strong>Custom alerts:</strong> turn on the global chime and vibration so you can tell when your dog is nearby without looking at the screen.</li>
+            </ul>
+        </section>
+
+        <section class="two-column">
+            <div>
+                <h2>How It Works</h2>
+                <ol class="inline-list">
+                    <li>Attach a Bluetooth tag (AirTag, Tile, Chipolo, etc.) to your dog’s collar.</li>
+                    <li>Launch BlueDog Tracker on your Wear OS watch and tap <em>Start Scan</em>.</li>
+                    <li>As devices are discovered they appear on the circular dial. The colour intensity mirrors signal strength.</li>
+                    <li>Tap a slice to open the device overlay and block noisy strangers if the dial feels crowded.</li>
+                </ol>
+            </div>
+            <div>
+                <h2>Interface Highlights</h2>
+                <ul class="inline-list">
+                    <li><strong>Live Scanner Dial:</strong> only active devices are shown; closer trackers glow brighter.</li>
+                    <li><strong>Device Overlay:</strong> Click on a BT address slice to see signal strength, last seen time, and a quick action to block distractions.</li>
+                    <li><strong>Global Alerts:</strong> enable chime and/or vibration so every new device discovery gets your attention.</li>
+                    <li><strong>Block List:</strong> hide persistent non-dog devices (smart watches, earbuds) from the dial.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Quick Start Checklist</h2>
+            <ul class="inline-list">
+                <li>Ensure Bluetooth is enabled on the watch and grant scan/connect/location permissions.</li>
+                <li>Use the <strong>Settings</strong> screen to tweak vibration duration, chime, and other settings.</li>
+                <li>Block any background devices (earbuds, fitness trackers) so the radar stays focused on your pup.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Tips & Limitations</h2>
+            <ul class="inline-list">
+                <li>Bluetooth address rotation means BlueDog shines in low-noise environments. In busy downtown areas the results will churn constantly.</li>
+                <li>AirTags hide their identifiers, but they still broadcast presence – BlueDog shows the active tag even though it does not pair to the AirTag.</li>
+                <li>The dial always reflects what’s around you <em>right now</em>, keeping the interface simple and free of stale data.</li>
+            </ul>
+        </section>
+        
+    <footer>
+        Built for adventurous pups and the humans who follow them.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">BlueDog Tracker</string>
+
+    <!-- Scanner Screen -->
+    <string name="start_scan">Iniciar Escaneo</string>
+    <string name="stop_scan">Detener Escaneo</string>
+    <string name="stop_test">Detener Prueba</string>
+    <string name="grant_permissions">Otorgar Permisos</string>
+    <string name="settings">Configuración</string>
+
+    <!-- Settings Screen -->
+    <string name="vibration_alert_ms">Alerta de Vibración(ms)</string>
+    <string name="off">Apagado</string>
+    <string name="audible_chime">Sonido Audible</string>
+    <string name="screen_dim_timeout">Tiempo de Atenuación de Pantalla Durante el Escaneo</string>
+    <string name="screen_dim_level">Nivel de Atenuación de Pantalla</string>
+    <string name="radar_divisions">Divisiones del Radar</string>
+    <string name="radar_divisions_format">Divisiones del Radar: %d</string>
+    <string name="select_radar_divisions">Seleccionar Divisiones del Radar</string>
+    <string name="review_blocked">Revisar Bloqueados</string>
+    <string name="test">Prueba</string>
+    <string name="timeout_5s">5s</string>
+    <string name="timeout_30s">30s</string>
+
+    <!-- Review Screens -->
+    <string name="no_devices_blocked">No hay dispositivos bloqueados.</string>
+    <string name="unknown_device">Dispositivo Desconocido</string>
+    <string name="unblock_all">Desbloquear Todos</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+
+    <!-- Device Overlay -->
+    <string name="rssi_format">RSSI: %d dBm</string>
+    <string name="seen_ago_format">Visto hace %s</string>
+    <string name="block">Bloquear</string>
+
+    <!-- Chime Selection Screen -->
+    <string name="chime">Sonido</string>
+    <string name="select_chime_format">Seleccionar %s</string>
+
+    <!-- Chime Options -->
+    <string name="chime_click">Clic</string>
+    <string name="chime_focus">Enfoque</string>
+    <string name="chime_call_guard">Guardia de Llamada</string>
+    <string name="chime_network_lite">Red Ligera</string>
+    <string name="chime_beep">Pitido</string>
+    <string name="chime_ack">Aceptar</string>
+    <string name="chime_nack">Rechazar</string>
+    <string name="chime_dtmf_0">DTMF 0</string>
+    <string name="chime_dtmf_1">DTMF 1</string>
+    <string name="chime_dtmf_2">DTMF 2</string>
+    <string name="chime_dtmf_3">DTMF 3</string>
+    <string name="chime_dtmf_4">DTMF 4</string>
+    <string name="chime_dtmf_5">DTMF 5</string>
+    <string name="chime_dtmf_6">DTMF 6</string>
+    <string name="chime_dtmf_7">DTMF 7</string>
+    <string name="chime_dtmf_8">DTMF 8</string>
+    <string name="chime_dtmf_9">DTMF 9</string>
+    <string name="chime_dtmf_star">DTMF Asterisco</string>
+    <string name="chime_dtmf_pound">DTMF Almohadilla</string>
+
+    <!-- Screen Dim Modes -->
+    <string name="dim_mode_black">Negro</string>
+    <string name="dim_mode_dark">1%</string>
+    <string name="dim_mode_dim">5%</string>
+
+    <!-- MainActivity Notifications -->
+    <string name="ongoing_ble_scanning">Actividad de escaneo BLE en curso</string>
+    <string name="scanning_for_devices">Escaneando dispositivos BLE…</string>
+    <string name="unknown">Desconocido</string>
+    <string name="no_perm">Sin Permiso</string>
+    <string name="test_prefix">Prueba-</string>
+</resources>
