@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.utils
+package com.rareventure.bluedog.presentation.utils
 
 import kotlin.math.max
 import kotlin.math.min

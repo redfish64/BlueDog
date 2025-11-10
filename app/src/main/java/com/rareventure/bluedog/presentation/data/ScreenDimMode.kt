@@ -1,7 +1,7 @@
-package com.rareventure.blescanner2.presentation.data
+package com.rareventure.bluedog.presentation.data
 
 import android.content.Context
-import com.rareventure.blescanner2.R
+import com.rareventure.bluedog.R
 
 /**
  * Represents the different screen dimming modes available when the device is inactive.

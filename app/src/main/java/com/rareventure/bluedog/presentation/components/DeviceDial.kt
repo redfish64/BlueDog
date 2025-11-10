@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.components
+package com.rareventure.bluedog.presentation.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -13,9 +13,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.rareventure.blescanner2.presentation.data.ScannedDevice
-import com.rareventure.blescanner2.presentation.utils.mapRssiToValue
-import com.rareventure.blescanner2.presentation.utils.AppDefaults
+import com.rareventure.bluedog.presentation.data.ScannedDevice
+import com.rareventure.bluedog.presentation.utils.mapRssiToValue
+import com.rareventure.bluedog.presentation.utils.AppDefaults
 import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos

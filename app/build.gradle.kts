@@ -12,7 +12,7 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-    namespace = "com.rareventure.blescanner2"
+    namespace = "com.rareventure.bluedog"
     compileSdk = 34
 
     signingConfigs {
@@ -25,7 +25,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.rareventure.blescanner2"
+        applicationId = "com.rareventure.bluedog"
         minSdk = 28
         targetSdk = 34
         versionCode = 1

@@ -1,9 +1,9 @@
-package com.rareventure.blescanner2.presentation.data
+package com.rareventure.bluedog.presentation.data
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.media.ToneGenerator
-import com.rareventure.blescanner2.presentation.utils.AppDefaults
+import com.rareventure.bluedog.presentation.utils.AppDefaults
 
 /**
  * Manages saving and loading of app settings using SharedPreferences.

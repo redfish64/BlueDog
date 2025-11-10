@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.utils
+package com.rareventure.bluedog.presentation.utils
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.dp

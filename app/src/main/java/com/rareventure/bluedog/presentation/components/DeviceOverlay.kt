@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.components
+package com.rareventure.bluedog.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -31,9 +31,9 @@ import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import com.rareventure.blescanner2.R
-import com.rareventure.blescanner2.presentation.data.ScannedDevice
-import com.rareventure.blescanner2.presentation.utils.AppDefaults
+import com.rareventure.bluedog.R
+import com.rareventure.bluedog.presentation.data.ScannedDevice
+import com.rareventure.bluedog.presentation.utils.AppDefaults
 import kotlin.math.abs
 
 @Composable

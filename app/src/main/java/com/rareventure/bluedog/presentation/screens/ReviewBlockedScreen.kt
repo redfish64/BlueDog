@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.screens
+package com.rareventure.bluedog.presentation.screens
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -12,9 +12,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.*
-import com.rareventure.blescanner2.R
-import com.rareventure.blescanner2.presentation.data.BlockedDevice
-import com.rareventure.blescanner2.presentation.utils.AppDefaults
+import com.rareventure.bluedog.R
+import com.rareventure.bluedog.presentation.data.BlockedDevice
+import com.rareventure.bluedog.presentation.utils.AppDefaults
 
 @Composable
 fun ReviewBlockedScreen(

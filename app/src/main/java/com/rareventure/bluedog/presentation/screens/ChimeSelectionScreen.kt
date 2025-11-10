@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.screens
+package com.rareventure.bluedog.presentation.screens
 
 import android.media.AudioManager
 import android.media.RingtoneManager
@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.*
-import com.rareventure.blescanner2.R
-import com.rareventure.blescanner2.presentation.utils.AppDefaults
+import com.rareventure.bluedog.R
+import com.rareventure.bluedog.presentation.utils.AppDefaults
 
 enum class ChimeType { TONE, RINGTONE, SYSTEM_SOUND }
 

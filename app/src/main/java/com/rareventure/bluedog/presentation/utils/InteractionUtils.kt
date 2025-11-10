@@ -1,7 +1,7 @@
-package com.rareventure.blescanner2.presentation.utils
+package com.rareventure.bluedog.presentation.utils
 
 import android.content.Context
-import com.rareventure.blescanner2.presentation.MainActivity
+import com.rareventure.bluedog.presentation.MainActivity
 
 /**
  * Runs [action] only when the host activity is ready to handle user input.

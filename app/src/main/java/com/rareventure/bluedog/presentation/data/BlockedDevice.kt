@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.data
+package com.rareventure.bluedog.presentation.data
 
 // Data class to hold blocked device information
 data class BlockedDevice(

@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.screens
+package com.rareventure.bluedog.presentation.screens
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -18,13 +18,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.*
-import com.rareventure.blescanner2.R
-import com.rareventure.blescanner2.presentation.components.BatteryIndicator
-import com.rareventure.blescanner2.presentation.components.DeviceOverlay
-import com.rareventure.blescanner2.presentation.components.DeviceDial
-import com.rareventure.blescanner2.presentation.data.ScannedDevice
-import com.rareventure.blescanner2.presentation.utils.AppDefaults
-import com.rareventure.blescanner2.presentation.utils.runIfInteractionAllowed
+import com.rareventure.bluedog.R
+import com.rareventure.bluedog.presentation.components.BatteryIndicator
+import com.rareventure.bluedog.presentation.components.DeviceOverlay
+import com.rareventure.bluedog.presentation.components.DeviceDial
+import com.rareventure.bluedog.presentation.data.ScannedDevice
+import com.rareventure.bluedog.presentation.utils.AppDefaults
+import com.rareventure.bluedog.presentation.utils.runIfInteractionAllowed
 
 @Composable
 fun ScannerScreen(

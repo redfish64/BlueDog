@@ -1,4 +1,4 @@
-package com.rareventure.blescanner2.presentation.theme
+package com.rareventure.bluedog.presentation.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
