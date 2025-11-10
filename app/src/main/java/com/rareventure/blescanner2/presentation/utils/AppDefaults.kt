@@ -16,7 +16,7 @@ object AppDefaults {
     const val DEVICE_HISTORY_RETENTION_MS: Long = 90L * 24 * 60 * 60 * 1000 // 90 days
 
     // UI literals
-    const val RADAR_CANVAS_SIZE_FRACTION: Float = 0.9f
+    const val DIAL_CANVAS_SIZE_FRACTION: Float = 0.9f
     const val BATTERY_INDICATOR_RADIUS_FRACTION: Float = 0.35f
     const val BATTERY_START_ANGLE_DEGREES: Float = -90f
     const val BATTERY_MAX_SWEEP_DEGREES: Float = 360f

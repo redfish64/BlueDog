@@ -11,7 +11,7 @@ Can we work on making html documentation for this project? You can take a look a
   visit the place, come in contact with the person, or start and use the car on several different times. This
   app could then discover which bluetooth addresses were consistantly there, after multiple visits. This would
   allow you to know which, if any bluetooth addresses were associated with a place, person or thing.
-  You can also block devices temporarily to declutter the radar when needed. Also, we'll have to talk about groups, which allows
+  You can also block devices temporarily to declutter the dial when needed. Also, we'll have to talk about groups, which allows
   you to separate different investigations so that you can track several things at once. I'd leave that to the
   end though, and call it advanced. Please place the documentation in the docs/ directory. I placed some
   screenshots there. If you need more screenshots, let me know.

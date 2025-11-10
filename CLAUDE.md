@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-BLEScanner2 is an Android Wear OS application that scans for Bluetooth Low Energy (BLE) devices and displays them on a circular radar interface. The app provides real-time proximity alerts via haptic and audio feedback when devices are detected.
+BLEScanner2 is an Android Wear OS application that scans for Bluetooth Low Energy (BLE) devices and displays them on a circular dial interface. The app provides real-time proximity alerts via haptic and audio feedback when devices are detected.
 
 ## Build & Run Commands
 
@@ -45,21 +45,21 @@ The app follows a **single-activity architecture** with composable screens:
 
 2. **State Management Flow**:
    - `scannedDevices`: Map of MAC address → ScannedDevice data
-   - `addressToSlotMap`: Maps device addresses to radar slice positions (persistent during scan)
+   - `addressToSlotMap`: Maps device addresses to dial slice positions (persistent during scan)
    - `blockedAddresses`: Persisted user preferences via SettingsManager
    - Settings are loaded on app startup and saved immediately on change
 
 3. **Screen Components** (in `presentation/screens/`):
-   - `ScannerScreen`: Main radar view with start/stop controls
-   - `SettingsScreen`: Vibration, chime, and radar divisions configuration
+   - `ScannerScreen`: Main dial view with start/stop controls
+   - `SettingsScreen`: Vibration, chime, and dial divisions configuration
    - `ReviewBlockedScreen`: Manage blocked device list
 
 4. **Key Components** (in `presentation/components/`):
-   - `DeviceRadar`: Circular Canvas-based radar that displays devices as colored arcs
+   - `DeviceDial`: Circular Canvas-based dial that displays devices as colored arcs
      - Each device gets a "slot" (slice of the circle) based on address hash
      - Outer ring: device presence with time-based brightness fade
      - Inner ring: proximity visualization based on RSSI
-   - `DeviceOverlay`: Modal popup when tapping a device on radar (block action)
+   - `DeviceOverlay`: Modal popup when tapping a device on dial (block action)
 
 ### Important Data Flow
 
@@ -84,7 +84,7 @@ The app follows a **single-activity architecture** with composable screens:
 **SettingsManager** (`presentation/data/SettingsManager.kt`):
 - Uses SharedPreferences for persistent storage
 - All save operations use `.apply()` for async writes
-- Settings: vibration duration, chime on/off, radar divisions, blocked addresses set
+- Settings: vibration duration, chime on/off, dial divisions, blocked addresses set
 
 **ScannedDevice** (`presentation/data/ScannedDevice.kt`):
 - Immutable data class with: deviceName, address, rssi, lastSeen timestamp
@@ -100,7 +100,7 @@ com.rareventure.blescanner2
     │   ├── SettingsScreen.kt
     │   └── ReviewBlockedScreen.kt
     ├── components/              # Reusable UI components
-    │   ├── DeviceRadar.kt       # Main radar visualization
+    │   ├── DeviceDial.kt        # Main dial visualization
     │   └── DeviceOverlay.kt     # Device detail popup
     ├── data/                    # Data layer
     │   ├── SettingsManager.kt
@@ -127,7 +127,7 @@ com.rareventure.blescanner2
 - Keep screen on is managed via `WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON` when scanning
 - Animation timer runs at ~20fps (50ms delay) via LaunchedEffect when scanning is active
 
-### Radar Interaction
+### Dial Interaction
 - Tap detection: Converts tap coordinates to angle, determines which slice was tapped
 - The pointerInput modifier is keyed to `slotMap.keys` to force recomposition when devices change
 

@@ -21,7 +21,7 @@ import androidx.wear.compose.material.*
 import com.rareventure.blescanner2.R
 import com.rareventure.blescanner2.presentation.components.BatteryIndicator
 import com.rareventure.blescanner2.presentation.components.DeviceOverlay
-import com.rareventure.blescanner2.presentation.components.DeviceRadar
+import com.rareventure.blescanner2.presentation.components.DeviceDial
 import com.rareventure.blescanner2.presentation.data.ScannedDevice
 import com.rareventure.blescanner2.presentation.utils.AppDefaults
 import com.rareventure.blescanner2.presentation.utils.runIfInteractionAllowed
@@ -58,12 +58,12 @@ fun ScannerScreen(
                 .background(MaterialTheme.colors.background),
             contentAlignment = Alignment.Center
         ) {
-            DeviceRadar(
+            DeviceDial(
                 devices = scannedDevices,
                 slotMap = slotMap,
                 numDivisions = numDivisions,
                 onSliceTapped = onSliceTapped,
-                modifier = Modifier.fillMaxSize(AppDefaults.RADAR_CANVAS_SIZE_FRACTION),
+                modifier = Modifier.fillMaxSize(AppDefaults.DIAL_CANVAS_SIZE_FRACTION),
                 excludedSlots = excludedSlots,
                 isScanning = isScanning,
                 currentTime = currentTime
@@ -156,7 +156,7 @@ fun ScannerScreen(
                     batteryLevel = batteryLevel,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .fillMaxSize(AppDefaults.RADAR_CANVAS_SIZE_FRACTION)
+                        .fillMaxSize(AppDefaults.DIAL_CANVAS_SIZE_FRACTION)
                 )
             }
 

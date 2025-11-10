@@ -27,12 +27,12 @@ private const val FULL_ROTATION_DEGREES = 360f
 private const val NORTH_ANGLE_DEGREES = -90f
 private const val SLICE_GAP_RATIO = 0.92f
 private const val INNER_STROKE_RATIO = 0.45f
-private const val RADAR_RADIUS_DENOMINATOR = 2.2f
+private const val DIAL_RADIUS_DENOMINATOR = 2.2f
 private val OUTER_STROKE_WIDTH = 8.dp
 private val INNER_OUTER_GAP = 2.dp
 
 @Composable
-fun DeviceRadar(
+fun DeviceDial(
     devices: Map<String, ScannedDevice>,
     slotMap: Map<String, Int>,
     numDivisions: Int,
@@ -50,7 +50,7 @@ fun DeviceRadar(
                     val slotToAddressMap = slotMap.entries.associateBy({ it.value }) { it.key }
                     val canvasSize = min(size.width, size.height)
                     val center = Offset(this.size.width / 2f, this.size.height / 2f)
-                    val radius = canvasSize / RADAR_RADIUS_DENOMINATOR
+                    val radius = canvasSize / DIAL_RADIUS_DENOMINATOR
 
                     // Calculate rotation offset to match drawing rotation
                     val numExcluded = excludedSlots.size
@@ -79,7 +79,7 @@ fun DeviceRadar(
     ) {
         val slotToAddressMap = slotMap.entries.associateBy({ it.value }) { it.key }
         val center = Offset(size.width / 2, size.height / 2)
-        val radius = min(size.width, size.height) / RADAR_RADIUS_DENOMINATOR
+        val radius = min(size.width, size.height) / DIAL_RADIUS_DENOMINATOR
         val sweepAngle = FULL_ROTATION_DEGREES / numDivisions * SLICE_GAP_RATIO // Gap between slices
         val outerStrokeWidth = OUTER_STROKE_WIDTH.toPx()
         val innerStrokeWidth = radius * INNER_STROKE_RATIO

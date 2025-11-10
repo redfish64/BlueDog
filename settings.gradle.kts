@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "BLEScanner2"
 include(":app")
- 
+include(":app")

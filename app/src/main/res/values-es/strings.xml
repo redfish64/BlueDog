@@ -14,9 +14,9 @@
     <string name="audible_chime">Sonido Audible</string>
     <string name="screen_dim_timeout">Tiempo de Atenuación de Pantalla Durante el Escaneo</string>
     <string name="screen_dim_level">Nivel de Atenuación de Pantalla</string>
-    <string name="radar_divisions">Divisiones del Radar</string>
-    <string name="radar_divisions_format">Divisiones del Radar: %d</string>
-    <string name="select_radar_divisions">Seleccionar Divisiones del Radar</string>
+    <string name="radar_divisions">Divisiones del Dial</string>
+    <string name="radar_divisions_format">Divisiones del Dial: %d</string>
+    <string name="select_radar_divisions">Seleccionar Divisiones del Dial</string>
     <string name="review_blocked">Revisar Bloqueados</string>
     <string name="test">Prueba</string>
     <string name="timeout_5s">5s</string>

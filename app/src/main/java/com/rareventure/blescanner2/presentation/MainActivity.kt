@@ -82,7 +82,7 @@ private enum class Screen { SCANNER, SETTINGS, REVIEW_BLOCKED, CHIME_SELECTION, 
  * Calculates which slots should be excluded (reserved for gear icon area).
  * Slots are centered at the bottom (6 o'clock position).
  *
- * @param actualDivisions Total number of divisions in the radar
+ * @param actualDivisions Total number of divisions in the dial
  * @param usableSlots Number of slots available for devices
  * @return Set of slot indices to exclude
  */

@@ -14,9 +14,9 @@
     <string name="audible_chime">Audible Chime</string>
     <string name="screen_dim_timeout">Screen Dim Timeout while Scanning</string>
     <string name="screen_dim_level">Screen Dim Timeout Dimming Level</string>
-    <string name="radar_divisions">Radar Divisions</string>
-    <string name="radar_divisions_format">Radar Divisions: %d</string>
-    <string name="select_radar_divisions">Select Radar Divisions</string>
+    <string name="radar_divisions">Dial Divisions</string>
+    <string name="radar_divisions_format">Dial Divisions: %d</string>
+    <string name="select_radar_divisions">Select Dial Divisions</string>
     <string name="review_blocked">Review Blocked</string>
     <string name="test">Test</string>
     <string name="timeout_5s">5s</string>
