@@ -631,78 +631,81 @@ fun BleScannerContent(
 
     // --- Shared Device Discovery Logic ---
     val handleDeviceDiscovery: (String, String, Int) -> Unit = { deviceName, address, rssi ->
-        val previousDeviceState = scannedDevices[address]
+        // Skip blocked devices early
+        if (address !in blockedAddresses) {
+            val previousDeviceState = scannedDevices[address]
 
-        val triggerDiscoveryFeedback = {
-            val chimeId = if (isChimeOn) chimeTone else AppDefaults.CHIME_OFF_ID
-            if (chimeId != AppDefaults.CHIME_OFF_ID) {
-                playChime(chimeId)
-            }
-
-            val vibrationDuration = vibrationDurationMs
-            if (vibrationDuration > 0L) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    vibrator.vibrate(
-                        VibrationEffect.createOneShot(
-                            vibrationDuration,
-                            VibrationEffect.DEFAULT_AMPLITUDE
-                        )
-                    )
-                } else {
-                    @Suppress("DEPRECATION")
-                    vibrator.vibrate(vibrationDuration)
+            val triggerDiscoveryFeedback = {
+                val chimeId = if (isChimeOn) chimeTone else AppDefaults.CHIME_OFF_ID
+                if (chimeId != AppDefaults.CHIME_OFF_ID) {
+                    playChime(chimeId)
                 }
-            }
-        }
 
-        val excludedSlots = calculateExcludedSlots(actualDivisions, usableSlots)
-        var shouldAddDevice = previousDeviceState != null
-        var targetSlot: Int? = addressToSlotMap[address]
-
-        if (previousDeviceState == null) {
-            shouldAddDevice = true
-            triggerDiscoveryFeedback()
-
-            if (addressToSlotMap.size < usableSlots) {
-                val preferredSlot = abs(address.hashCode()) % actualDivisions
-                var candidateSlot = preferredSlot
-
-                while ((addressToSlotMap.containsValue(candidateSlot) || candidateSlot in excludedSlots)) {
-                    candidateSlot = (candidateSlot + 151) % actualDivisions
-                    assert(candidateSlot != preferredSlot) {
-                        "Looped back to start, no slot available, usableSlots = $usableSlots, addressToSlotMap.size = ${addressToSlotMap.size}"
+                val vibrationDuration = vibrationDurationMs
+                if (vibrationDuration > 0L) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        vibrator.vibrate(
+                            VibrationEffect.createOneShot(
+                                vibrationDuration,
+                                VibrationEffect.DEFAULT_AMPLITUDE
+                            )
+                        )
+                    } else {
+                        @Suppress("DEPRECATION")
+                        vibrator.vibrate(vibrationDuration)
                     }
                 }
-
-                targetSlot = candidateSlot
-            } else {
-                val displayedDevices = scannedDevices
-                    .filter { it.key in addressToSlotMap }
-                    .map { (addr, device) -> addr to device }
-
-                val deviceToReplace = displayedDevices.minByOrNull { (_, device) -> device.lastSeen }
-                val freedSlot = deviceToReplace?.first?.let { addressToSlotMap[it] }
-
-                if (deviceToReplace != null && freedSlot != null) {
-                    addressToSlotMap.remove(deviceToReplace.first)
-                    scannedDevices = scannedDevices - deviceToReplace.first
-                    targetSlot = freedSlot
-                } else {
-                    shouldAddDevice = false
-                }
             }
-        } else if (previousDeviceState.rssi == -120) {
-            triggerDiscoveryFeedback()
-        }
 
-        if (shouldAddDevice) {
-            targetSlot?.let { addressToSlotMap[address] = it }
-            scannedDevices = scannedDevices + (address to ScannedDevice(deviceName, address, rssi))
+            val excludedSlots = calculateExcludedSlots(actualDivisions, usableSlots)
+            var shouldAddDevice = previousDeviceState != null
+            var targetSlot: Int? = addressToSlotMap[address]
+
+            if (previousDeviceState == null) {
+                shouldAddDevice = true
+                triggerDiscoveryFeedback()
+
+                if (addressToSlotMap.size < usableSlots) {
+                    val preferredSlot = abs(address.hashCode()) % actualDivisions
+                    var candidateSlot = preferredSlot
+
+                    while ((addressToSlotMap.containsValue(candidateSlot) || candidateSlot in excludedSlots)) {
+                        candidateSlot = (candidateSlot + 151) % actualDivisions
+                        assert(candidateSlot != preferredSlot) {
+                            "Looped back to start, no slot available, usableSlots = $usableSlots, addressToSlotMap.size = ${addressToSlotMap.size}"
+                        }
+                    }
+
+                    targetSlot = candidateSlot
+                } else {
+                    val displayedDevices = scannedDevices
+                        .filter { it.key in addressToSlotMap }
+                        .map { (addr, device) -> addr to device }
+
+                    val deviceToReplace = displayedDevices.minByOrNull { (_, device) -> device.lastSeen }
+                    val freedSlot = deviceToReplace?.first?.let { addressToSlotMap[it] }
+
+                    if (deviceToReplace != null && freedSlot != null) {
+                        addressToSlotMap.remove(deviceToReplace.first)
+                        scannedDevices = scannedDevices - deviceToReplace.first
+                        targetSlot = freedSlot
+                    } else {
+                        shouldAddDevice = false
+                    }
+                }
+            } else if (previousDeviceState.rssi == -120) {
+                triggerDiscoveryFeedback()
+            }
+
+            if (shouldAddDevice) {
+                targetSlot?.let { addressToSlotMap[address] = it }
+                scannedDevices = scannedDevices + (address to ScannedDevice(deviceName, address, rssi))
+            }
         }
     }
 
     // --- Test Mode Device Generator ---
-    LaunchedEffect(isTestMode, usableSlots) {
+    LaunchedEffect(isTestMode, usableSlots, blockedAddresses) {
         if (isTestMode) {
             // Adjust speed based on number of usable slots
             // More slots = faster device generation to fill them
@@ -761,6 +764,28 @@ fun BleScannerContent(
         }
     }
 
+    // --- Restart scan when blockedAddresses changes during active scan ---
+    DisposableEffect(isScanning, scanCallback) {
+        if (isScanning && bleScanner != null) {
+            val scanSettings = ScanSettings.Builder()
+                .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+                .build()
+            bleScanner.startScan(null, scanSettings, scanCallback)
+            Log.d(TAG, "Scan started/restarted with current blockedAddresses")
+        }
+
+        onDispose {
+            if (bleScanner != null && isScanning) {
+                try {
+                    bleScanner.stopScan(scanCallback)
+                    Log.d(TAG, "Scan callback stopped in dispose")
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error stopping scan in dispose: $e")
+                }
+            }
+        }
+    }
+
     // --- Device Timeout Logic ---
     LaunchedEffect(isScanning, scannedDevices) {
         if (isScanning) {
@@ -789,7 +814,6 @@ fun BleScannerContent(
     // --- Scan Control Functions ---
     val stopScan: () -> Unit = lambda@{
         isScanning = false
-        bleScanner?.stopScan(scanCallback)
         (context as? MainActivity)?.stopOngoingActivity()
 
         return@lambda
@@ -800,10 +824,6 @@ fun BleScannerContent(
             scannedDevices = mapOf()
             addressToSlotMap.clear()
             isScanning = true
-            val scanSettings = ScanSettings.Builder()
-                .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
-                .build()
-            bleScanner.startScan(null, scanSettings, scanCallback)
             (context as? MainActivity)?.startOngoingActivity()
         } else {
             permissionLauncher.launch(requiredPermissions)
@@ -897,6 +917,7 @@ fun BleScannerContent(
                         blockedDevices.value = newBlocked
                         settingsManager.saveBlockedDevices(newBlocked)
                         addressToSlotMap.remove(address)
+                        scannedDevices = scannedDevices - address
                         selectedAddress = null
                     },
                     excludedSlots = excludedSlots,
