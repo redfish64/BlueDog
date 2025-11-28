@@ -7,6 +7,8 @@
     <string name="stop_test">Detener Prueba</string>
     <string name="grant_permissions">Otorgar Permisos</string>
     <string name="settings">Configuración</string>
+    <string name="bluetooth_off">Bluetooth Está Apagado</string>
+    <string name="turn_on_bluetooth">Activar Bluetooth</string>
 
     <!-- Settings Screen -->
     <string name="vibration_alert_ms">Alerta de Vibración(ms)</string>

@@ -28,8 +28,8 @@ android {
         applicationId = "com.rareventure.bluedog"
         minSdk = 28
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.0.1"
+        versionCode = 9
+        versionName = "1.0.9"
         vectorDrawables {
             useSupportLibrary = true
         }

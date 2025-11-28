@@ -30,6 +30,7 @@ import com.rareventure.bluedog.presentation.utils.runIfInteractionAllowed
 fun ScannerScreen(
     isScanning: Boolean,
     hasPermissions: Boolean,
+    isBluetoothEnabled: Boolean,
     scannedDevices: Map<String, ScannedDevice>,
     slotMap: Map<String, Int>,
     numDivisions: Int,
@@ -85,7 +86,31 @@ fun ScannerScreen(
                         Text(stringResource(R.string.stop_test), textAlign = TextAlign.Center, color = Color.Black)
                     }
                 } else if (!isScanning) {
-                    if (hasPermissions) {
+                    if (!isBluetoothEnabled) {
+                        // Show bluetooth disabled warning
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text(
+                                stringResource(R.string.bluetooth_off),
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colors.error,
+                                fontSize = 14.sp
+                            )
+                            Chip(
+                                onClick = {
+                                    // Open bluetooth settings
+                                    context.runIfInteractionAllowed {
+                                        val intent = android.content.Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS)
+                                        context.startActivity(intent)
+                                    }
+                                },
+                                label = { Text(stringResource(R.string.turn_on_bluetooth)) },
+                                modifier = Modifier.padding(4.dp)
+                            )
+                        }
+                    } else if (hasPermissions) {
                         Button(onClick = { context.runIfInteractionAllowed { onStartScan() } }) {
                             Text(stringResource(R.string.start_scan), textAlign = TextAlign.Center)
                         }
@@ -150,8 +175,8 @@ fun ScannerScreen(
                 }
             }
 
-            // Battery indicator drawn on top (only show when permissions granted)
-            if (hasPermissions) {
+            // Battery indicator drawn on top (only show when permissions granted and bluetooth is enabled)
+            if (hasPermissions && isBluetoothEnabled) {
                 BatteryIndicator(
                     batteryLevel = batteryLevel,
                     modifier = Modifier

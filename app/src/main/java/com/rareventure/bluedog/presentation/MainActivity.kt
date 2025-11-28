@@ -419,6 +419,44 @@ fun BleScannerContent(
     var selectedAddress by remember { mutableStateOf<String?>(null) }
     var isTestMode by remember { mutableStateOf(false) }
 
+    // Track bluetooth state
+    val bluetoothAdapter = remember {
+        val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager
+        bluetoothManager?.adapter
+    }
+    var isBluetoothEnabled by remember {
+        mutableStateOf(bluetoothAdapter?.isEnabled == true)
+    }
+
+    // Track when bluetooth is turned off to trigger scan stop
+    var shouldStopScanDueToBluetooth by remember { mutableStateOf(false) }
+
+    // Monitor bluetooth state changes
+    DisposableEffect(Unit) {
+        val bluetoothReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == BluetoothAdapter.ACTION_STATE_CHANGED) {
+                    val state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
+                    isBluetoothEnabled = state == BluetoothAdapter.STATE_ON
+                    // Trigger scan stop if bluetooth is turned off while scanning
+                    if (!isBluetoothEnabled && isScanning) {
+                        shouldStopScanDueToBluetooth = true
+                    }
+                }
+            }
+        }
+        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+        context.registerReceiver(bluetoothReceiver, filter)
+
+        onDispose {
+            try {
+                context.unregisterReceiver(bluetoothReceiver)
+            } catch (e: IllegalArgumentException) {
+                // Receiver was not registered
+            }
+        }
+    }
+
     // Track screen dimmed state in Compose
     var isScreenDimmedState by remember { mutableStateOf(false) }
 
@@ -764,6 +802,23 @@ fun BleScannerContent(
         }
     }
 
+    // --- Handle bluetooth turned off during scan ---
+    LaunchedEffect(shouldStopScanDueToBluetooth) {
+        if (shouldStopScanDueToBluetooth) {
+            if (bleScanner != null && isScanning) {
+                try {
+                    bleScanner.stopScan(scanCallback)
+                    Log.d(TAG, "BLE scan stopped due to bluetooth being turned off")
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error stopping BLE scan when bluetooth turned off: $e")
+                }
+            }
+            isScanning = false
+            (context as? MainActivity)?.stopOngoingActivity()
+            shouldStopScanDueToBluetooth = false
+        }
+    }
+
     // --- Restart scan when blockedAddresses changes during active scan ---
     DisposableEffect(isScanning, scanCallback) {
         if (isScanning && bleScanner != null) {
@@ -775,7 +830,9 @@ fun BleScannerContent(
         }
 
         onDispose {
-            if (bleScanner != null && isScanning) {
+            // Always try to stop the scan on dispose, regardless of isScanning state
+            // because isScanning might have been set to false before dispose is called
+            if (bleScanner != null) {
                 try {
                     bleScanner.stopScan(scanCallback)
                     Log.d(TAG, "Scan callback stopped in dispose")
@@ -813,6 +870,14 @@ fun BleScannerContent(
 
     // --- Scan Control Functions ---
     val stopScan: () -> Unit = lambda@{
+        if (isScanning && bleScanner != null) {
+            try {
+                bleScanner.stopScan(scanCallback)
+                Log.d(TAG, "BLE scan stopped explicitly")
+            } catch (e: Exception) {
+                Log.e(TAG, "Error stopping BLE scan: $e")
+            }
+        }
         isScanning = false
         (context as? MainActivity)?.stopOngoingActivity()
 
@@ -820,6 +885,12 @@ fun BleScannerContent(
     }
 
     val startScan: () -> Unit = lambda@{
+        // Check bluetooth state first
+        if (!isBluetoothEnabled) {
+            Log.w(TAG, "Cannot start scan: Bluetooth is disabled")
+            return@lambda
+        }
+
         if (hasPermissions && bleScanner != null) {
             scannedDevices = mapOf()
             addressToSlotMap.clear()
@@ -838,6 +909,12 @@ fun BleScannerContent(
             when (event) {
                 Lifecycle.Event.ON_PAUSE -> {
                     // Stop scanning when app goes to background
+                    if (isScanning) {
+                        stopScan()
+                    }
+                }
+                Lifecycle.Event.ON_STOP -> {
+                    // Ensure scanning is stopped when app is no longer visible
                     if (isScanning) {
                         stopScan()
                     }
@@ -883,6 +960,7 @@ fun BleScannerContent(
                 ScannerScreen(
                     isScanning = isScanning,
                     hasPermissions = hasPermissions,
+                    isBluetoothEnabled = isBluetoothEnabled,
                     scannedDevices = scannedDevices.filterKeys { it !in blockedAddresses },
                     slotMap = addressToSlotMap,
                     numDivisions = actualDivisions,
